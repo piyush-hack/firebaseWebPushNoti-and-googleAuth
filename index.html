@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-messaging.js"></script>
+
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyA8zpeXuvi8bGuQQW_k4j2jn4HMm5GnA40",
+            authDomain: "jovial-branch-295110.firebaseapp.com",
+            projectId: "jovial-branch-295110",
+            storageBucket: "jovial-branch-295110.appspot.com",
+            messagingSenderId: "92463015553",
+            appId: "1:92463015553:web:df410aa2866ccb8fb20f80",
+            measurementId: "G-FYXFL41GE8"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        console.log("here 1");
+
+        // let Messaging;
+        // if (YOUR_CHECK_HERE) {
+        //     Messaging = firebase.messaging();
+        // }
+        // firebase.initializeApp(firebaseConfig);
+
+        function getMessagingObject() {
+            // [START messaging_get_messaging_object]
+            const messaging = firebase.messaging();
+            // [END messaging_get_messaging_object]
+        }
+
+        function receiveMessage() {
+            const messaging = firebase.messaging();
+            // [START messaging_receive_message]
+            // Handle incoming messages. Called when:
+            // - a message is received while the app has focus
+            // - the user clicks on an app notification created by a service worker
+            //   `messaging.onBackgroundMessage` handler.
+            messaging.onMessage((payload) => {
+                console.log('Message received. ', payload);
+                // ...
+            });
+            // [END messaging_receive_message]
+        }
+        receiveMessage();
+
+        
+        function getToken() {
+            console.log("here 2");
+            const hrhe = function isBrowser(func) { return process.browser ? func : () => isBrowser(func); }
+
+            let messaging;
+            if (hrhe) {
+                messaging = firebase.messaging();
+            }
+            // const messaging = firebase.messaging();
+            console.log("here 3");
+
+            // [START messaging_get_token]
+            // Get registration token. Initially this makes a network call, once retrieved
+            // subsequent calls to getToken will return from cache.
+            messaging.getToken({ vapidKey: 'BLVKLuTO1kORd8JvEeDIQ_rXR7BvvfXlxVV7jwxt0PNJPi9SJDBUEjQcI4SkxL4VwFvZIjatKf5Oz_fHXNtXieM' }).then((currentToken) => {
+                if (currentToken) {
+                    // Send the token to your server and update the UI if necessary
+                    // ...
+                    console.log(currentToken);
+                    saveinserver(currentToken);
+                } else {
+                    // Show permission request UI
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            }).catch((err) => {
+                console.log('An error occurred while retrieving token. ', err);
+                // ...
+            });
+            // [END messaging_get_token]
+        }
+
+        function requestPermission() {
+            // [START messaging_request_permission]
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                    console.log('Notification permission granted.');
+                    // TODO(developer): Retrieve a registration token for use with FCM.
+                    // ...
+                } else {
+                    console.log('Unable to get permission to notify.');
+                }
+            });
+            // [END messaging_request_permission]
+        }
+
+        function deleteToken() {
+            const messaging = firebase.messaging();
+
+            // [START messaging_delete_token]
+            messaging.deleteToken().then(() => {
+                console.log('Token deleted.');
+                // ...
+            }).catch((err) => {
+                console.log('Unable to delete token. ', err);
+            });
+            // [END messaging_delete_token]
+        }
+
+        function saveinserver(currentToken) {
+            console.log("sending to server ", currentToken);
+            var xhr = new XMLHttpRequest();
+            console.log("sending post request ot toserver")
+            xhr.open("POST", "/toserver", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () { // Call a function when the state changes.
+                if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+                    // Request finished. Do processing here.
+                }
+            }
+            xhr.send(JSON.stringify({
+                "device_token": currentToken
+            }));
+        }
+        requestPermission();
+        getToken();
+
+
+
+    </script>
+
+</body>
+
+</html>
