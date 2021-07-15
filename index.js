@@ -1,6 +1,6 @@
 const express = require('express'); //Import the express dependency
 const app = express();              //Instantiate an express app, the main work horse of this server
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 const fs = require("fs");
 const path = require("path");
