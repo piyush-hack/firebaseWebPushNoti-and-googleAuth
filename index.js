@@ -25,13 +25,13 @@ app.use(bodyParser());
 
 firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
-    databaseURL: "https://jovial-branch-295110-default-rtdb.firebaseio.com/"
+    databaseURL: "<<YOUR DATABSE URI>>"
 });
 
 
 const stringifiedParams = queryString.stringify({
-    client_id: "92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com",
-    redirect_uri: 'http://localhost:5000/auth',
+    client_id: "clientid.apps.googleusercontent.com",
+    redirect_uri: 'Your redirect uri',
     scope: [
         'https://www.googleapis.com/auth/userinfo.email',
         'https://www.googleapis.com/auth/userinfo.profile',
@@ -43,7 +43,7 @@ const stringifiedParams = queryString.stringify({
 
 console.log(stringifiedParams)
 
-mongoose.connect("mongodb+srv://noti_token:piyush2001@notitoken.flzpe.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("your db uri/test", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 
