@@ -41,14 +41,15 @@
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyA8zpeXuvi8bGuQQW_k4j2jn4HMm5GnA40",
-            authDomain: "jovial-branch-295110.firebaseapp.com",
-            projectId: "jovial-branch-295110",
-            storageBucket: "jovial-branch-295110.appspot.com",
-            messagingSenderId: "92463015553",
-            appId: "1:92463015553:web:df410aa2866ccb8fb20f80",
-            measurementId: "G-FYXFL41GE8"
+       var firebaseConfig = {
+          apiKey: "AIzaSyDOCAbC123dEf456GhI789jKl01-MnO",
+          authDomain: "myapp-project-123.firebaseapp.com",
+          databaseURL: "https://myapp-project-123.firebaseio.com",
+          projectId: "myapp-project-123",
+          storageBucket: "myapp-project-123.appspot.com",
+          messagingSenderId: "65211879809",
+          appId: "1:65211879909:web:3ae38ef1cdcb2e01fe5f0c",
+          measurementId: "G-8GSGZQ44ST"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -98,7 +99,7 @@
             // [START messaging_get_token]
             // Get registration token. Initially this makes a network call, once retrieved
             // subsequent calls to getToken will return from cache.
-            messaging.getToken({ vapidKey: 'BLVKLuTO1kORd8JvEeDIQ_rXR7BvvfXlxVV7jwxt0PNJPi9SJDBUEjQcI4SkxL4VwFvZIjatKf5Oz_fHXNtXieM' }).then((currentToken) => {
+            messaging.getToken({ vapidKey: 'vvvvvvvvRd8JvEeDIQ_rXR7BvvfXlxVV7jwxt0PNJPxxxxxxxxxxxxVwFvZIjatKf5Oz_fHXNtXieM' }).then((currentToken) => {
                 if (currentToken) {
                     // Send the token to your server and update the UI if necessary
                     // ...
