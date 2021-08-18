@@ -1,7 +1,7 @@
 const express = require('express'); //Import the express dependency
 const app = express();              //Instantiate an express app, the main work horse of this server
-// const port = process.env.PORT;
-const port = 5000;
+const port = process.env.PORT || 5000;
+// const port = 5000;
 const fs = require("fs");
 const path = require("path");
 const mongoose = require('mongoose')
@@ -54,151 +54,24 @@ db.once('open', function () {
     console.log("connected to mongooose");
 
 });
-const noti_token = new mongoose.Schema({
-    usermail: String,
-    username: String,
-    device_token: String,
 
-});
-
-noti_token.methods.speak = function () {//this is used in case you wanna have have method callback
-    const greeting = "token is " + this.device_token
-    console.log(greeting);
-}
-
-
-const c_noti_token = mongoose.model('noti_token', noti_token);
-app.get('/generateToken', (req, res) => {
-    res.sendFile('index.html', { root: __dirname });
-});
 
 app.get('/', (req, res) => {
     var params = { "data": stringifiedParams }
     res.status(200).render('index', params);
 });
 
-app.post('/auth', (req, res) => {
-    var user_idtoken = req.body.useridtoken;
-    console.log(user_idtoken);
-    //or send post or get at https://oauth2.googleapis.com/tokeninfo?id_token=client_idtoken to verify user
-    const client = new OAuth2Client("92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com");
-    async function verify() {
-        console.log("verifying");
-        const ticket = await client.verifyIdToken({
-            idToken: user_idtoken,
-            audience: "92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
-            // Or, if multiple clients access the backend:
-            //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-        });
-        const payload = ticket.getPayload();
-        const userid = payload['sub'];
-
-        console.log(payload['given_name'])
-        const user = new c_noti_token({
-            username: payload.given_name,
-            usermail: payload.email
-        });
-
-        // Inserts a new document with `name = 'Will Riker'` and
-        // `rank = 'Commander'`
-        user.save();
-        // If request specified a G Suite domain:
-        // const domain = payload['hd'];
-    }
-    verify().catch(console.error);
-
-    res.status(200).render('admin');
-
-
-});
-
-
 app.get('/firebase-messaging-sw.js', (req, res) => {        //get requests to the root ("/") will route here
     res.sendFile('firebase-messaging-sw.js', { root: __dirname });      //server responds by sending the index.html file to the client's browser
     //the .sendFile method needs the absolute path to the file, see: https://expressjs.com/en/4x/api.html#res.sendFile 
 });
 
-app.post('/toserver', (req, res) => {
-    const d_token = req.body.device_token;
-    console.log(req.body.device_token);
-    const c_token = new c_noti_token({
-        device_token: `${d_token}`
-    });
+const notirouter = require('./routes/noti');
+const loginrouter = require('./routes/googlelogin');
 
-    // Inserts a new document with `name = 'Will Riker'` and
-    // `rank = 'Commander'`
-    c_token.save();
-    res.send("done");
-});
+app.use('/noti', notirouter);
+app.use('/login', loginrouter);
 
-app.get('/admin', (req, res) => {
-
-    c_noti_token.find({}, function (err, someValue) {
-        if (err) console.log(err);
-        const params = { 'alltokens': JSON.stringify(someValue) };
-        // console.log(params);
-        res.status(200).render('admin', params);
-
-    });
-    // res.status(200).render('index', params);
-
-});
-
-app.post('/admin', (req, res) => {
-
-    var clientToken = req.body.tokenOfClient;
-    // sendnoti(clientToken, res);
-    const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
-
-
-
-    wait(4 * 1000).then(() => {
-        console.log("waited for 4 seconds");
-        sendnoti(clientToken);
-
-    });
-
-    wait(8 * 1000).then(() => {
-        console.log("waited for 8 seconds")
-        res.send("sent")
-
-    });
-
-
-});
-
-
-
-// The Firebase token of the device which will get the notification
-// It can be a string or an array of strings
-function sendnoti(clientToken) {
-
-    // const firebaseToken = 'cCwYg6Lclvt5s9TKuFIMWV:APA91bHa9eT74fkeP4LVydr1f6r3YkzwXs8D7UcAq1i7BZahtlFXAxVqkCR890qFCrkIcFnch1VNNVcdOACCl9F-iC4oudGqElY7Q2SnOgAXbYSMkH61wbYtVhXX8VZ7GIpTZGIB_VwD';
-    const firebaseToken = clientToken;
-
-
-    const payload = {
-        notification: {
-            title: 'Notification Title',
-            subtitle: "test subtitle",
-            body: 'This is an my noti',
-            image: "https://solarianprogrammer.com/images/2015/05/08/circles.jpg",
-            click_action: "/"
-
-        },
-
-    };
-
-    const options = {
-        priority: 'high',
-        timeToLive: 60 * 60 * 24, // 1 day
-    };
-
-    firebase.messaging().sendToDevice(firebaseToken, payload, options);
-    console.log("sent by func");
-    // res.send("sending noti");      
-
-}
 
 // function getOAuthClient() {
 //     return new OAuth2("92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com", "LAhUoyQIAuHlKt6HsPV1E8jr", "http://localhost:5000/auth");

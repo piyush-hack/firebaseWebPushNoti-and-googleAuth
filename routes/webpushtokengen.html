@@ -5,11 +5,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>GET TOKEN</title>
 
 </head>
 
 <body>
+
+    <div class="card text-center" style="display: block;margin-top: 7vw;">
+        <div class="card-header">
+          TOKEN SAVED !!
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Device Token</h5>
+          <p class="card-text" id="tokentext">Loading Token.....</p>
+          <a href="#" class="btn btn-primary" id="admin_redirect_btn">Go To Send Noti Page</a>
+        </div>
+        <div class="card-footer text-muted">
+          Happy Coding
+        </div>
+    </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
@@ -64,7 +83,7 @@
         }
         receiveMessage();
 
-        
+
         function getToken() {
             console.log("here 2");
             const hrhe = function isBrowser(func) { return process.browser ? func : () => isBrowser(func); }
@@ -128,7 +147,15 @@
             console.log("sending to server ", currentToken);
             var xhr = new XMLHttpRequest();
             console.log("sending post request ot toserver")
-            xhr.open("POST", "/toserver", true);
+            xhr.open("POST", "/noti/toserver", true);
+            xhr.onload = function () {
+                // do something to response
+                // alert(this.responseText);
+                document.getElementById("tokentext").innerHTML = this.responseText;
+                document.getElementById("admin_redirect_btn").href = "/noti/admin?device_token=" + currentToken;
+
+                // window.location.href = "/noti/admin?device_token=" + currentToken;
+            };
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onreadystatechange = function () { // Call a function when the state changes.
                 if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Google Login</title>
+</head>
+<body>
+
+    <div class="card text-center" style="display: block;margin-top: 7vw;">
+        <div class="card-header">
+            | GOOGLE LOGIN !!
+            <p style="width: 100%;text-align: center;">
+                <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style="display: inline-block;"></div>
+            </p>
+
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Your Login Details</h5>
+            <p class="card-text" id="logintext">
+            <br> Your Login Details Will Be Shown Here .
+            <br> Your Data Will Not Be Saved In Database Until You Give Us The Permission . 
+            <br> We will Ask for saving Data after Displaying Your Details <br><br></p>
+            <a href="/" class="btn btn-primary" id="admin_redirect_btn">HOME</a>
+            <br><br>
+            <a href="#" id="signOut" class="g_id_signout btn btn-danger"  style = "display:none;width:180px;margin:auto" onclick="signOut();"> Sign out</a>
+            <br>
+            <button id="dbsave" class="btn btn-primary" style="display:none;margin:auto">Save in db</button>
+
+        </div>
+        <div class="card-footer text-muted">
+            | Happy Coding
+        </div>
+    </div>
+    
+
+     
+
+    
+</body>
+<script src="../static/login.js" id="token_data"></script>
+</html>
+

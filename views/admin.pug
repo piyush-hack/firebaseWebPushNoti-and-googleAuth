@@ -5,17 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>Document</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>WEB PUSH ADMIN</title>
 </head>
 <body>
-    <a href="#" id="signOut" class="g_id_signout" style = "display:none" onclick="signOut();"> Sign out</a>
     
-    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-     
-    <button id="dbsave" style="display:none">Save in db</button>
-    <div id="noti_div" style="margin: auto; width: 70%;padding: 10vw;"></div>
+    <div id="noti_div"  class="notidiv" style="margin: auto; width: 50%;padding: 10vw;"></div>
+    //- <button type="button" class="button">
+    //-     <span class="button__text">Save Changes</span>
+    //- </button>
+    
     
 </body>
 <script src="/static/admin_handler.js" data="#{alltokens}" id="token_data"></script>
