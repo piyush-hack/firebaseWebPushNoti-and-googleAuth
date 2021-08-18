@@ -4,14 +4,15 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js');
 
 // Initialize the Firebase app in the service worker by passing the generated config
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyA8zpeXuvi8bGuQQW_k4j2jn4HMm5GnA40",
-  authDomain: "jovial-branch-295110.firebaseapp.com",
-  projectId: "jovial-branch-295110",
-  storageBucket: "jovial-branch-295110.appspot.com",
-  messagingSenderId: "92463015553",
-  appId: "1:92463015553:web:df410aa2866ccb8fb20f80",
-  measurementId: "G-FYXFL41GE8"
+var firebaseConfig = {
+  apiKey: "AIzaSyDOCAbC123dEf456GhI789jKl01-MnO",
+  authDomain: "myapp-project-123.firebaseapp.com",
+  databaseURL: "https://myapp-project-123.firebaseio.com",
+  projectId: "myapp-project-123",
+  storageBucket: "myapp-project-123.appspot.com",
+  messagingSenderId: "65211879809",
+  appId: "1:65211879909:web:3ae38ef1cdcb2e01fe5f0c",
+  measurementId: "G-8GSGZQ44ST"
 };
 
 firebase.initializeApp(firebaseConfig);
