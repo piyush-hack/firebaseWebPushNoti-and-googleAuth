@@ -57,7 +57,7 @@ function onSignIn(googleUser) {
 
 function savetodb(btn, id_token) {
     var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    var theUrl = "/auth";
+    var theUrl = "/login/auth";
     xmlhttp.open("POST", theUrl);
     xmlhttp.onload = function () {
         console.log(xmlhttp.responseURL); // http://example.com/test
