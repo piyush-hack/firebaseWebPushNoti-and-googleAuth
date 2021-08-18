@@ -21,12 +21,12 @@ router.route("/").get((req, res) => {
 //     var user_idtoken = req.body.useridtoken;
 //     console.log(user_idtoken);
 //     //or send post or get at https://oauth2.googleapis.com/tokeninfo?id_token=client_idtoken to verify user
-//     const client = new OAuth2Client("92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com");
+//     const client = new OAuth2Client("12345678900-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com");
 //     async function verify() {
 //         console.log("verifying");
 //         const ticket = await client.verifyIdToken({
 //             idToken: user_idtoken,
-//             audience: "92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+//             audience: "12345678900-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
 //             // Or, if multiple clients access the backend:
 //             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
 //         });
@@ -58,12 +58,12 @@ router.route('/auth').post((req, res) => {
     var user_idtoken = req.body.useridtoken;
     console.log(user_idtoken);
     //or send post or get at https://oauth2.googleapis.com/tokeninfo?id_token=client_idtoken to verify user
-    const client = new OAuth2Client("92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com");
+    const client = new OAuth2Client("12345678900-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com");
     async function verify() {
         console.log("verifying");
         const ticket = await client.verifyIdToken({
             idToken: user_idtoken,
-            audience: "92463015553-fv6fqpch3hifsd9tjjda92pq0n23nbfm.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+            audience: "12345678900-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
             // Or, if multiple clients access the backend:
             //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
         });
