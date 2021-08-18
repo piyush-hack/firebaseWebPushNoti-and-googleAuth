@@ -100,7 +100,6 @@ router.route("/admin").post((req, res) => {
 // It can be a string or an array of strings
 function sendnoti(clientToken) {
 
-    // const firebaseToken = 'cCwYg6Lclvt5s9TKuFIMWV:APA91bHa9eT74fkeP4LVydr1f6r3YkzwXs8D7UcAq1i7BZahtlFXAxVqkCR890qFCrkIcFnch1VNNVcdOACCl9F-iC4oudGqElY7Q2SnOgAXbYSMkH61wbYtVhXX8VZ7GIpTZGIB_VwD';
     const firebaseToken = clientToken;
 
 
